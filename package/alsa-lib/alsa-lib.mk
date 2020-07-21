@@ -56,11 +56,20 @@ ALSA_LIB_CONF_OPTS += --disable-old-symbols
 endif
 
 ifeq ($(BR2_PACKAGE_ALSA_LIB_PYTHON),y)
+ifeq ($(BR2_PACKAGE_PYTHON),y)
 ALSA_LIB_CONF_OPTS += \
+	--enable-python2 \
 	--with-pythonlibs=-lpython$(PYTHON_VERSION_MAJOR) \
 	--with-pythonincludes=$(STAGING_DIR)/usr/include/python$(PYTHON_VERSION_MAJOR)
 ALSA_LIB_CFLAGS += -I$(STAGING_DIR)/usr/include/python$(PYTHON_VERSION_MAJOR)
 ALSA_LIB_DEPENDENCIES = python
+else
+ALSA_LIB_CONF_OPTS += \
+	--with-pythonlibs=-lpython$(PYTHON3_VERSION_MAJOR) \
+	--with-pythonincludes=$(STAGING_DIR)/usr/include/python$(PYTHON3_VERSION_MAJOR)
+ALSA_LIB_CFLAGS += -I$(STAGING_DIR)/usr/include/python$(PYTHON3_VERSION_MAJOR)
+ALSA_LIB_DEPENDENCIES = python3
+endif
 else
 ALSA_LIB_CONF_OPTS += --disable-python
 endif
