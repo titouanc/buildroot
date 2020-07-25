@@ -11,15 +11,16 @@ GST1_VALIDATE_LICENSE = LGPL-2.1+
 GST1_VALIDATE_LICENSE_FILES = COPYING
 
 GST1_VALIDATE_DEPENDENCIES = \
+	host-python3 \
 	gstreamer1 \
 	gst1-plugins-base \
 	json-glib \
 	$(if $(BR2_PACKAGE_CAIRO),cairo)
 
 ifeq ($(BR2_PACKAGE_PYTHON3),y)
-GST1_VALIDATE_DEPENDENCIES += host-python3 python3
+GST1_VALIDATE_DEPENDENCIES += python3
 else
-GST1_VALIDATE_DEPENDENCIES += host-python python
+GST1_VALIDATE_DEPENDENCIES += python
 endif
 
 GST1_VALIDATE_CONF_OPTS = \
