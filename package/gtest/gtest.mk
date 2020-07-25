@@ -17,16 +17,9 @@ endif
 
 HOST_GTEST_LICENSE = Apache-2.0
 HOST_GTEST_LICENSE_FILES = googlemock/scripts/generator/LICENSE
-ifeq ($(BR2_PACKAGE_PYTHON3),y)
-HOST_GTEST_PYTHON_VERSION = $(PYTHON3_VERSION_MAJOR)
 HOST_GTEST_DEPENDENCIES += host-python3
-else
-HOST_GTEST_PYTHON_VERSION = $(PYTHON_VERSION_MAJOR)
-HOST_GTEST_DEPENDENCIES += host-python
-endif
-
 HOST_GTEST_GMOCK_PYTHONPATH = \
-	$(HOST_DIR)/lib/python$(HOST_GTEST_PYTHON_VERSION)/site-packages
+	$(HOST_DIR)/lib/python$(PYTHON3_VERSION_MAJOR)/site-packages
 
 # While it is possible to build gtest as shared library, using this gtest shared
 # library requires to set some special configure option in the project using
